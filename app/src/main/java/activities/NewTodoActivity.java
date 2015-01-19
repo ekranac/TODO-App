@@ -9,16 +9,13 @@ import android.widget.Toast;
 
 import com.example.ziga.todoapp.R;
 
-/**
- * Created by ziga on 1/19/15.
- */
 public class NewTodoActivity extends ActionBarActivity {
 
 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_add_todo);
     }
 
     @Override

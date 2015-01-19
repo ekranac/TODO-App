@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         app:showAsAction="always" />
 
+    <item android:id="@+id/view_drafts"
+        android:title="DRAFTS"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
 </menu>

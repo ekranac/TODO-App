@@ -23,9 +23,6 @@ public class ParseHelper extends Application{
     {
         Parse.enableLocalDatastore(getApplicationContext());
         Parse.initialize(this, appId, deviceId);
-        ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-        ParseACL.setDefaultACL(defaultACL, true);
 
         // This part below is super important- it registers your device to receive push notifications
         ParsePush.subscribeInBackground("", new SaveCallback() {

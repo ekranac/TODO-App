@@ -8,7 +8,6 @@ import android.view.MenuItem;
 
 import com.example.ziga.todoapp.R;
 
-
 public class MainActivity extends ActionBarActivity {
 
     @Override
