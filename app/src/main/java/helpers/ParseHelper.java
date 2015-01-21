@@ -4,16 +4,11 @@ import android.app.Application;
 import android.util.Log;
 
 import com.parse.Parse;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParsePush;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 
-/**
- * Created by ziga on 1/19/15.
- */
 public class ParseHelper extends Application{
 
     String appId = "WiqAlHYJXe4c4S42DTS9NfDrQe7HKNqWf0ypmpoI";
