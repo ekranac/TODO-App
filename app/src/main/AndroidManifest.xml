@@ -39,6 +39,10 @@
             android:label="Add new TODO"
             android:screenOrientation="portrait"></activity>
 
+        <activity android:name="activities.DraftsActivity"
+            android:label="Add new TODO"
+            android:screenOrientation="portrait"></activity>
+
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.parse.ParseBroadcastReceiver">
             <intent-filter>

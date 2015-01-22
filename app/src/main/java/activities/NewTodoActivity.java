@@ -1,5 +1,6 @@
 package activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -68,6 +69,11 @@ public class NewTodoActivity extends ActionBarActivity {
 
         if (id == R.id.action_save_draft) {
             Toast.makeText(getApplicationContext(), "Saved as draft", Toast.LENGTH_SHORT).show();
+        }
+        else if(id == R.id.view_drafts)
+        {
+            Intent intent = new Intent(NewTodoActivity.this, DraftsActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
