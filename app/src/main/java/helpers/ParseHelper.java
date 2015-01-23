@@ -14,8 +14,7 @@ public class ParseHelper extends Application{
     String appId = "WiqAlHYJXe4c4S42DTS9NfDrQe7HKNqWf0ypmpoI";
     String deviceId = "RJk9Q116isx3q4DEHnjToLxC5jrj5RQDQbZ9S6oy";
 
-    public void onCreate()
-    {
+    public void onCreate() {
         Parse.enableLocalDatastore(getApplicationContext());
         Parse.initialize(this, appId, deviceId);
 
@@ -31,4 +30,5 @@ public class ParseHelper extends Application{
             }
         });
     }
+
 }

@@ -1,18 +1,14 @@
 package activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.ziga.todoapp.R;
 import com.parse.ParseObject;
@@ -25,6 +21,8 @@ public class NewTodoActivity extends ActionBarActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_todo);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Creates back button in action bar- !Need to set parent activity in manifest
 
         final EditText input = (EditText) findViewById(R.id.input);
         final ImageButton cross = (ImageButton) findViewById(R.id.cross);
@@ -81,25 +79,5 @@ public class NewTodoActivity extends ActionBarActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_second, menu); // Different menu for this activity
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_save_draft) {
-            Toast.makeText(getApplicationContext(), "Saved as draft", Toast.LENGTH_SHORT).show();
-        }
-        else if(id == R.id.view_drafts)
-        {
-            Intent intent = new Intent(NewTodoActivity.this, DraftsActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

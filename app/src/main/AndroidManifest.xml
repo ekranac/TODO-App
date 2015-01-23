@@ -38,13 +38,10 @@
         <activity android:name="activities.NewTodoActivity"
             android:label="Add new TODO"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustResize"></activity> <!-- This 'adjustResize' is really cool,
+            android:windowSoftInputMode="stateVisible|adjustResize"
+            android:parentActivityName="activities.MainActivity"></activity> <!-- This 'adjustResize' is really cool,
             it squeezes the content of the screen,
             that's why it shows submit button which is usually at the bottom -->
-
-        <activity android:name="activities.DraftsActivity"
-            android:label="Add new TODO"
-            android:screenOrientation="portrait"></activity>
 
         <service android:name="com.parse.PushService" />
         <receiver android:name="com.parse.ParseBroadcastReceiver">
