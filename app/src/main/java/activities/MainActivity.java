@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.ziga.todoapp.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
 import java.util.List;
+
+import adapters.ListAdapter;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -24,11 +26,12 @@ public class MainActivity extends ActionBarActivity {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ToDo");
         query.fromLocalDatastore();
+        query.orderByDescending("Created");
         query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> list,
-                             ParseException e) {
+            public void done(List<ParseObject> list, ParseException e) {
                 if (e == null) {
-                    Log.d("score", "Retrieved " + list.size());
+                    ListView listView = (ListView) findViewById(R.id.listview_main);
+                    ListAdapter.fillList(getApplicationContext(), list, listView);
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
@@ -50,7 +53,6 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(MainActivity.this, NewTodoActivity.class);
             startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

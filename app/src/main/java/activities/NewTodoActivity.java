@@ -13,6 +13,10 @@ import android.widget.ImageButton;
 import com.example.ziga.todoapp.R;
 import com.parse.ParseObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class NewTodoActivity extends ActionBarActivity {
 
@@ -66,9 +70,15 @@ public class NewTodoActivity extends ActionBarActivity {
                 {
                     ParseObject object = new ParseObject("ToDo");
                     object.put("Content", input.getText().toString());
+
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    Date date = new Date();
+                    object.put("Created", dateFormat.format(date));
                     object.put("Checked", false);
 
                     object.pinInBackground();
+
+                    input.setText("");
                 }
                 else
                 {
