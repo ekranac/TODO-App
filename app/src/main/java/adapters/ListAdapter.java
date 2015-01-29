@@ -16,16 +16,13 @@ public class ListAdapter {
 
     public static void fillList(Context context, List<ParseObject> list, ListView listView)
     {
-        String[] contentArray = new String[list.size()];
+
+        ArrayList<String> strings = new ArrayList<String>();
         for(int i = 0; i < list.size(); i++)
         {
-            contentArray[i] = list.get(i).getString("Content");
+            strings.add(list.get(i).getString("Content"));
         }
 
-        // Transforms raw data from Array to ArrayList so it can be implemented to adapter later
-        List<String> contentList = new ArrayList<String>(Arrays.asList(contentArray));
-
-        // Adapter set
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(
                 // Get context of the activity
                 context,
@@ -34,9 +31,10 @@ public class ListAdapter {
                 // ID of the TextView to populate
                 R.id.list_item_textview,
                 // ArrayList data
-                contentList
+                strings
         );
 
         listView.setAdapter(mAdapter);
+
     }
 }
