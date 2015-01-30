@@ -1,20 +1,23 @@
 package adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.ziga.todoapp.R;
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public class ListAdapter {
 
-    public static void fillList(Context context, List<ParseObject> list, ListView listView)
+    public static void applyAdapter(Context context, List<ParseObject> list, ListView listView)
     {
 
         ArrayList<String> strings = new ArrayList<String>();
@@ -36,5 +39,21 @@ public class ListAdapter {
 
         listView.setAdapter(mAdapter);
 
+    }
+
+    public static void fillList(final Context context, final ListView listView)
+    {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("ToDo");
+        query.fromLocalDatastore();
+        query.whereEqualTo("Checked", false);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> list, ParseException e) {
+                if (e == null) {
+                    ListAdapter.applyAdapter(context, list, listView);
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 }
