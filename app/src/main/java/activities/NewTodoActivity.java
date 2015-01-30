@@ -1,10 +1,12 @@
 package activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +32,41 @@ public class NewTodoActivity extends ActionBarActivity {
 
         final EditText input = (EditText) findViewById(R.id.input);
         final ImageButton cross = (ImageButton) findViewById(R.id.cross);
-        Button buttonSubmit = (Button) findViewById(R.id.submit_button);
+
+        input.setOnKeyListener(new View.OnKeyListener() { // Posts to do when enter key is pressed
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+                {
+                    if(input.length() != 0)
+                    {
+                        ParseObject object = new ParseObject("ToDo");
+                        object.put("Content", input.getText().toString());
+
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        Date date = new Date();
+                        object.put("Created", dateFormat.format(date));
+                        object.put("Checked", false);
+
+                        object.pinInBackground();
+
+
+                        Intent intent = new Intent(NewTodoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Log.e("Empty", "BITCH");
+                    }
+
+                    return false;
+                }
+
+                return false;
+            }
+        });
 
         input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -62,31 +98,6 @@ public class NewTodoActivity extends ActionBarActivity {
                 input.setText("");
             }
         });
-
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(input.length() != 0)
-                {
-                    ParseObject object = new ParseObject("ToDo");
-                    object.put("Content", input.getText().toString());
-
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    Date date = new Date();
-                    object.put("Created", dateFormat.format(date));
-                    object.put("Checked", false);
-
-                    object.pinInBackground();
-
-                    input.setText("");
-                }
-                else
-                {
-                    Log.e("Empty", "BITCH");
-                }
-            }
-        });
-
     }
 
 

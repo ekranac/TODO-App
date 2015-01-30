@@ -24,11 +24,4 @@
         android:visibility="invisible"
         android:id="@+id/cross"/>
 
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:text="Submit"
-        android:textSize="40sp"
-        android:id="@+id/submit_button"/>
 </RelativeLayout>
