@@ -11,4 +11,11 @@
         android:background="@color/almost_white">
         </ListView>
 
+    <ImageView
+        android:id="@+id/empty_list_view"
+        android:layout_width="250dp"
+        android:layout_height="190dp"
+        android:src="@drawable/notodos"
+        android:visibility="gone" />
+
 </RelativeLayout>

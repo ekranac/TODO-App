@@ -1,11 +1,13 @@
 package helpers;
 
 
-import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -14,9 +16,10 @@ import com.parse.ParseQuery;
 
 import java.util.List;
 
+
 public class OtherHelper{
 
-    public static void deleteItem(final ListView listView, final int position)
+    public static void deleteItem(final ListView listView, final int position, final Context context, final View view, final int colorBackground, final int colorText)
     {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ToDo");
@@ -36,6 +39,13 @@ public class OtherHelper{
                 } else {
                     Log.d("score", "Error: " + e.getMessage());
                 }
+
+                Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_out_right);
+                animation.setDuration(250);
+                view.setBackgroundColor(colorBackground);
+                ((TextView) view).setTextColor(colorText);
+                view.startAnimation(animation);
+                view.setVisibility(view.INVISIBLE);
             }
         });
     }
