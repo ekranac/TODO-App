@@ -8,14 +8,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ziga.todoapp.R;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import adapters.ListAdapter;
 import helpers.OtherHelper;
@@ -28,18 +31,38 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         final ListView listView = (ListView) findViewById(R.id.listview_main);
-
         ListAdapter.fillList(getApplicationContext(), listView);
 
-        listView.setEmptyView( findViewById( R.id.empty_list_view ) );
+        try{
+            Thread.sleep(100);
+        } catch(InterruptedException e){
+            Log.e("ERROR", e.toString());
+        }
 
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("ToDo");
+        query.fromLocalDatastore();
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> list,
+                             ParseException e) {
+                if (e == null) {
+                    try{
+                        Log.i("ITEM 0", list.get(0).get("Content").toString());
+                    } catch(Exception e1)
+                    {
+                        Log.e("ERROR", e1.toString());
+                        setContentView(R.layout.layout_nothing); // HAHA, IT WORKS :D
+                    }
 
-        // TODO
-        // Check if ListView is empty- if it is, display "NO TODOS"
+                } else {
+                    Log.d("score", "Error: " + e.getMessage());
+                }
+            }
+        });
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
+            public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {;
 
                 int colorBackground = getResources().getColor(R.color.pale_green);
                 int colorText = getResources().getColor(R.color.white);
@@ -47,7 +70,28 @@ public class MainActivity extends ActionBarActivity {
                 OtherHelper.deleteItem(listView, position, getApplicationContext(), view, colorBackground, colorText);
                 OtherHelper.deleteCheckedItems();
                 ListAdapter.fillList(getApplicationContext(), listView);
+
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("ToDo");
+                query.fromLocalDatastore();
+                query.findInBackground(new FindCallback<ParseObject>() {
+                    public void done(List<ParseObject> list,
+                                     ParseException e) {
+                        if (e == null) {
+                            try{
+                                Log.i("ITEM 0", list.get(1).get("Content").toString()); // Get element on index 1 because the deletion on index 0 isn't detected as deleted yet. It does the trick.
+                            } catch(Exception e1) {
+                                Log.e("ERROR", e1.toString());
+                                setContentView(R.layout.layout_nothing);
+                            }
+
+                        } else {
+                            Log.d("score", "Error: " + e.getMessage());
+                        }
+                    }
+                });
             }
+
+
         });
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.ziga.todoapp.R;
 import com.parse.FindCallback;
@@ -20,7 +19,6 @@ public class ListAdapter {
 
     public static void applyAdapter(Context context, List<ParseObject> list, ListView listView)
     {
-
         ArrayList<String> strings = new ArrayList<String>();
         for(int i = 0; i < list.size(); i++)
         {

@@ -1,21 +1,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".MainActivity"
+    android:id="@+id/main_view">
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/listview_main"
-        android:background="@color/almost_white">
-        </ListView>
+        android:background="@color/almost_white"/>
 
     <ImageView
         android:id="@+id/empty_list_view"
         android:layout_width="250dp"
         android:layout_height="190dp"
-        android:src="@drawable/notodos"
+        android:src="@drawable/notodo"
         android:visibility="gone" />
 
 </RelativeLayout>

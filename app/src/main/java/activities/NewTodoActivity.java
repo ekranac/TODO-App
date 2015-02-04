@@ -21,7 +21,6 @@ import java.util.Date;
 
 public class NewTodoActivity extends ActionBarActivity {
 
-
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -51,6 +50,11 @@ public class NewTodoActivity extends ActionBarActivity {
 
                         object.pinInBackground();
 
+                        try{
+                            Thread.sleep(30);
+                        } catch(InterruptedException e){
+                            Log.e("ERROR", e.toString());
+                        }
 
                         Intent intent = new Intent(NewTodoActivity.this, MainActivity.class);
                         startActivity(intent);
@@ -59,10 +63,8 @@ public class NewTodoActivity extends ActionBarActivity {
                     {
                         Log.e("Empty", "BITCH");
                     }
-
                     return false;
                 }
-
                 return false;
             }
         });
